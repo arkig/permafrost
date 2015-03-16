@@ -17,8 +17,6 @@ package au.com.cba.omnia.permafrost.hdfs
 import java.io.{File, FileWriter}
 
 import scalaz._, Scalaz._
-import scalaz.\&/.{This, That}
-import scalaz.scalacheck.ScalazProperties.monad
 
 import org.scalacheck.Arbitrary, Arbitrary.arbitrary
 
@@ -27,7 +25,8 @@ import org.apache.hadoop.conf.Configuration
 
 import org.apache.avro.Schema
 
-import au.com.cba.omnia.omnitool.{Result, Ok, Error}
+import au.com.cba.omnia.omnitool.{Result, Ok}
+import au.com.cba.omnia.omnitool.test.OmnitoolProperties.resultantMonad
 import au.com.cba.omnia.omnitool.test.Arbitraries._
 
 import au.com.cba.omnia.permafrost.test.{HdfsTest, Identifier}
@@ -38,24 +37,10 @@ Hdfs Operations
 ===============
 
 Hdfs operations should:
-  obey monad laws                                         ${monad.laws[Hdfs]}
-  ||| is alias for `or`                                   $orAlias
-  or stops at first succeess                              $orFirstOk
-  or continues at first Error                             $orFirstError
-  mandatory success iif result is true                    $mandatoryMeansTrue
-  forbidden success iif result is false                   $forbiddenMeansFalse
-  recoverWith for all cases is the same as |||            $recoverWith
-  recoverWith only recovers the specified errors          $recoverWithSpecific
-  bracket always executes `after` action                  $bracket
-
-Hdfs construction:
-  result is constant                                      $result
-  hdfs handles exceptions                                 $safeHdfs
-  value handles exceptions                                $safeValue
-  guard success iif condition is true                     $guardMeansTrue
-  prevent success iif condition is false                  $preventMeansFalse
+  obey resultant monad laws (monad and plus laws)         ${resultantMonad.laws[Hdfs]}
 
 Hdfs io:
+  hdfs handles exceptions                                 $safeHdfs
   isFile should always be false on new path               $isFile
   isDirectory should always be false on new path          $isDirectory
   exists should always be false on new path               $exists
@@ -81,99 +66,8 @@ Hdfs avro:
 
 """
 
-  def orAlias = prop((x: Hdfs[Int], y: Hdfs[Int]) =>
-    (x ||| y).run(new Configuration) must_== (x or y).run(new Configuration))
-
-  def orFirstOk = prop((x: Int, y: Hdfs[Int]) =>
-    (Hdfs.result(Result.ok(x)) ||| y).run(new Configuration) must_==
-      Hdfs.result(Result.ok(x)).run(new Configuration))
-
-  def orFirstError = prop((x: String, y: Hdfs[Int]) =>
-    (Hdfs.fail(x) ||| y).run(new Configuration) must_== y.run(new Configuration))
-
-  def mandatoryMeansTrue = prop((x: Hdfs[Boolean], msg: String) => {
-    val runit = Hdfs.mandatory(x, msg).run(new Configuration)
-    val rbool = x.run(new Configuration)
-    (runit, rbool) must beLike {
-      case (Ok(_), Ok(true))     => ok
-      case (Error(_), Ok(false)) => ok
-      case (Error(_), Error(_))  => ok
-    }
-  })
-
-  def forbiddenMeansFalse = prop((x: Hdfs[Boolean], msg: String) => {
-    val runit = Hdfs.forbidden(x, msg).run(new Configuration)
-    val rbool = x.run(new Configuration)
-    (runit, rbool) must beLike {
-      case (Ok(_), Ok(false))   => ok
-      case (Error(_), Ok(rue))  => ok
-      case (Error(_), Error(_)) => ok
-    }
-  })
-
-  def recoverWith = prop((x: Hdfs[Int], y: Hdfs[Int]) =>
-    (x.recoverWith { case _ => y}).run(new Configuration) must_== (x ||| y).run(new Configuration)
-  )
-
-  def recoverWithSpecific = {
-    val r = Result.fail[Int]("test")
-    val a = Hdfs.result(r)
-    a.recoverWith { case This(_) => Hdfs.value(3) } must beValue(3)
-    a.recoverWith { case That(_) => Hdfs.value(3) } must beResult(r)
-  }
-
-  def bracket = {
-    val test = new Path("test")
-    val action1 = for {
-      value  <- Hdfs.mkdirs(test).bracket(_ => Hdfs.delete(test, true))(_ => Hdfs.fail[Int]("fail"))
-                  .recoverWith { case _ => Hdfs.value(3) }
-      exists <- Hdfs.exists(test)
-    } yield (3, exists)
-
-    val action2 = for {
-      value  <- Hdfs.mkdirs(test).bracket(_ => Hdfs.delete(test, true))(Hdfs.value(_))
-      exists <- Hdfs.exists(test)
-    } yield (value, exists)
-
-    action1 must beValue((3, false))
-    action2 must beValue((true, false))
-  }
-
-  def result = prop((v: Result[Int]) =>
-    Hdfs.result(v) must beResult { v })
-
-  def fail = prop((message: String) =>
-    Hdfs.fail(message) must beResult { Result.fail(message) })
-
-  def exception = prop((t: Throwable) =>
-    Hdfs.exception(t) must beResult { Result.exception(t) })
-
-  def error(config: Configuration) = prop((message: String, t: Throwable) =>
-    Hdfs.error(message, t) must beResult { Result.error(message, t) })
-
   def safeHdfs = prop((t: Throwable) =>
     Hdfs.hdfs(_ => throw t) must beResult { Result.exception(t) })
-
-  def safeValue = prop((t: Throwable) =>
-    Hdfs.value(throw t) must beResult { Result.exception(t) })
-
-  def guardMeansTrue = {
-    Hdfs.guard(true, "").run(new Configuration) must beLike {
-      case Ok(_) => ok
-    }
-    Hdfs.guard(false, "").run(new Configuration) must beLike {
-      case Error(_) => ok
-    }
-  }
-
-  def preventMeansFalse = {
-    Hdfs.prevent(true, "").run(new Configuration) must beLike {
-      case Error(_) => ok
-    }
-    Hdfs.prevent(false, "").run(new Configuration) must beLike {
-      case Ok(_) => ok
-    }
-  }
 
   def isFile = prop((p: Path) =>
     Hdfs.isFile(p) must beValue { false })
@@ -311,7 +205,7 @@ Hdfs avro:
   /** Note these are not general purpose, specific to testing laws. */
 
   implicit def HdfsArbirary[A: Arbitrary]: Arbitrary[Hdfs[A]] =
-    Arbitrary(arbitrary[Result[A]] map (Hdfs.result))
+    Arbitrary(arbitrary[Result[A]] map (Hdfs.result(_)))
 
   implicit def HdfsEqual: Equal[Hdfs[Int]] =
     Equal.equal[Hdfs[Int]]((a, b) =>
