@@ -41,7 +41,7 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A data-type that represents a HDFS operation.</p><p>HDFS operations use a hadoop configuration as context,
 and produce a (potentially failing) result.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/permafrost/tree/8994d5b3411aaa8e77b20fc8b9b638827613dbca//src/main/scala/au/com/cba/omnia/permafrost/hdfs/Hdfs.scala" target="_blank">Hdfs.scala</a></dd></dl><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/permafrost/tree/4da936efe4f93f8195cdca35860645c0273f8d1e//src/main/scala/au/com/cba/omnia/permafrost/hdfs/Hdfs.scala" target="_blank">Hdfs.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -168,19 +168,6 @@ and produce a (potentially failing) result.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#andThen" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="andThen[B](f:A=&gt;au.com.cba.omnia.omnitool.Result[B]):au.com.cba.omnia.permafrost.hdfs.Hdfs[B]"></a>
-      <a id="andThen[B]((A)⇒Result[B]):Hdfs[B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">andThen</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.omnitool.Result">Result</span>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.andThen.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.andThen.B">B</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Chain a context free result (i.</p><div class="fullcomment"><div class="comment cmt"><p>Chain a context free result (i.e. requires no configuration) to this Hdfs operation.</p></div></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
       <a id="asInstanceOf[T0]:T0"></a>
@@ -194,21 +181,6 @@ and produce a (potentially failing) result.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#bracket" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="bracket[B,C](after:A=&gt;au.com.cba.omnia.permafrost.hdfs.Hdfs[B])(during:A=&gt;au.com.cba.omnia.permafrost.hdfs.Hdfs[C]):au.com.cba.omnia.permafrost.hdfs.Hdfs[C]"></a>
-      <a id="bracket[B,C]((A)⇒Hdfs[B])((A)⇒Hdfs[C]):Hdfs[C]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">bracket</span><span class="tparams">[<span name="B">B</span>, <span name="C">C</span>]</span><span class="params">(<span name="after">after: (<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>) ⇒ <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.bracket.B">B</span>]</span>)</span><span class="params">(<span name="during">during: (<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>) ⇒ <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.bracket.C">C</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.bracket.C">C</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Applies the &quot;during&quot; action, calling &quot;after&quot; regardless of whether there was an error.</p><div class="fullcomment"><div class="comment cmt"><p>Applies the &quot;during&quot; action, calling &quot;after&quot; regardless of whether there was an error.
-All errors are rethrown. Generalizes try/finally.
-</p></div></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -228,19 +200,6 @@ All errors are rethrown. Generalizes try/finally.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ensuring[B](sequel:au.com.cba.omnia.permafrost.hdfs.Hdfs[B]):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="ensuring[B](Hdfs[B]):Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">ensuring</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="sequel">sequel: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.ensuring.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Like &quot;bracket&quot;, but takes only a computation to run afterward.</p><div class="fullcomment"><div class="comment cmt"><p>Like &quot;bracket&quot;, but takes only a computation to run afterward. Generalizes &quot;finally&quot;.</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -273,19 +232,6 @@ All errors are rethrown. Generalizes try/finally.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#flatMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="flatMap[B](f:A=&gt;au.com.cba.omnia.permafrost.hdfs.Hdfs[B]):au.com.cba.omnia.permafrost.hdfs.Hdfs[B]"></a>
-      <a id="flatMap[B]((A)⇒Hdfs[B]):Hdfs[B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">flatMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>) ⇒ <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.flatMap.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.flatMap.B">B</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Bind through successful Hdfs operations.</p>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
       <a id="getClass():Class[_]"></a>
@@ -312,19 +258,6 @@ All errors are rethrown. Generalizes try/finally.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#map" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="map[B](f:A=&gt;B):au.com.cba.omnia.permafrost.hdfs.Hdfs[B]"></a>
-      <a id="map[B]((A)⇒B):Hdfs[B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">map</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.map.B">B</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.map.B">B</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Map across successful Hdfs operations.</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -364,46 +297,6 @@ All errors are rethrown. Generalizes try/finally.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#onException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="onException[B](action:au.com.cba.omnia.permafrost.hdfs.Hdfs[B]):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="onException[B](Hdfs[B]):Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">onException</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="action">action: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.onException.B">B</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Like &quot;finally&quot;, but only performs the final action if there was an error.</p>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#or" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="or(other:=&gt;au.com.cba.omnia.permafrost.hdfs.Hdfs[A]):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="or(⇒Hdfs[A]):Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">or</span><span class="params">(<span name="other">other: ⇒ <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Runs the first Hdfs operation.</p><div class="fullcomment"><div class="comment cmt"><p>Runs the first Hdfs operation. If it fails, runs the second operation. Useful for chaining optional operations.</p><p>Throws away any error from the first operation.
-</p></div></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#recoverWith" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="recoverWith(recovery:PartialFunction[scalaz.\&amp;/.These[String,Throwable],au.com.cba.omnia.permafrost.hdfs.Hdfs[A]]):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="recoverWith(PartialFunction[scalaz.\&amp;/.These[String,Throwable],Hdfs[A]]):Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">recoverWith</span><span class="params">(<span name="recovery">recovery: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="scalaz.TheseInstances.These">scalaz.\&amp;/.These</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Throwable">Throwable</span>], <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Recovers from an error.</p>
     </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#run" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="run:org.apache.hadoop.conf.Configuration=&gt;au.com.cba.omnia.omnitool.Result[A]"></a>
       <a id="run:(Configuration)⇒Result[A]"></a>
@@ -417,45 +310,6 @@ All errors are rethrown. Generalizes try/finally.
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#safe" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="safe:au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="safe:Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">safe</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Convert this to a safe Hdfs operation that converts any exceptions to failed results.</p>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#safeMap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="safeMap[B](f:A=&gt;B):au.com.cba.omnia.permafrost.hdfs.Hdfs[B]"></a>
-      <a id="safeMap[B]((A)⇒B):Hdfs[B]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">safeMap</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="f">f: (<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>) ⇒ <span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.safeMap.B">B</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.safeMap.B">B</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Chain an unsafe operation through a successful Hdfs operation.</p>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#setMessage" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="setMessage(message:String):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="setMessage(String):Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">setMessage</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Set the error message in a failure case.</p><div class="fullcomment"><div class="comment cmt"><p>Set the error message in a failure case. Useful for providing contextual information without having to inspect result.</p></div></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -526,19 +380,6 @@ All errors are rethrown. Generalizes try/finally.
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.permafrost.hdfs.Hdfs#|||" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="|||(other:=&gt;au.com.cba.omnia.permafrost.hdfs.Hdfs[A]):au.com.cba.omnia.permafrost.hdfs.Hdfs[A]"></a>
-      <a id="|||(⇒Hdfs[A]):Hdfs[A]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bar$bar$bar" class="name">|||</span><span class="params">(<span name="other">other: ⇒ <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs">Hdfs</a>[<span class="extype" name="au.com.cba.omnia.permafrost.hdfs.Hdfs.A">A</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Alias for <code>or</code>.</p><div class="fullcomment"><div class="comment cmt"><p>Alias for <code>or</code>. Provides nice syntax: <code>Hdfs.create(&quot;bad path&quot;) ||| Hdfs.create(&quot;good path&quot;)</code></p></div></div>
     </li></ol>
             </div>
 
