@@ -2,12 +2,16 @@ uniform.project("permafrost", "au.com.cba.omnia.permafrost")
 
 uniformDependencySettings
 
+strictDependencySettings
+
+val omnitoolVersion = "1.8.1-20150326034344-bbff728"
+
 libraryDependencies :=
-  depend.hadoop() ++ depend.scalaz() ++ depend.testing() ++
-  depend.omnia("omnitool-core", "1.8.0-20150318034256-6b79776") ++
+  depend.hadoopClasspath ++ depend.hadoop() ++ depend.testing() ++
+  depend.omnia("omnitool-core", omnitoolVersion) ++
   Seq(
-    "org.apache.avro"   % "avro-mapred"   % "1.7.6",
-    "au.com.cba.omnia" %% "omnitool-core" % "1.8.0-20150318034256-6b79776" % "test" classifier "tests"
+    noHadoop("org.apache.avro"  % "avro-mapred"   % depend.versions.avro),
+    "au.com.cba.omnia"         %% "omnitool-core" % omnitoolVersion % "test" classifier "tests"
   )
 
 updateOptions := updateOptions.value.withCachedResolution(true)
