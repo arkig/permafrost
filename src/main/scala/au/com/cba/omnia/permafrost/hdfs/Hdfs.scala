@@ -24,7 +24,7 @@ import scalaz._, Scalaz._
 import scalaz.\&/.These
 
 import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.fs.{ChecksumFileSystem, FileSystem, Path, FSDataInputStream, FSDataOutputStream}
+import org.apache.hadoop.fs.{ChecksumFileSystem, FileSystem, Path, FSDataInputStream, FSDataOutputStream, PathFilter}
 
 import org.apache.avro.Schema
 import org.apache.avro.file.{DataFileReader, DataFileWriter}
@@ -100,6 +100,20 @@ object Hdfs extends ResultantOps[Hdfs] with ToResultantMonadOps {
   /** Check the specified `path` exists on HDFS and is a file. */
   def isFile(path: Path) =
     Hdfs.withFilesystem(_.isFile(path))
+
+  /** Check if the given path is a final directory - ie no more sub directories. */
+  def checkIfNoSubDir(path: Path, pathFilter: Option[PathFilter]) =
+    for {
+      isDir   <- Hdfs.isDirectory(path)
+      _       <- Hdfs.fail(s"'${path.toString}' must be a directory!").unlessM(isDir)
+      count   <- pathFilter match {
+                   case Some(pathFilter) =>
+                     Hdfs.withFilesystem(_.listStatus(path, pathFilter).filter(_.isDirectory).length)
+                   case None             =>
+                     Hdfs.withFilesystem(_.listStatus(path).filter(_.isDirectory).length)
+                 }
+      res     =  if (count == 0) true else false
+  } yield res
 
   /** Open file with specified path. */
   def open(path: Path): Hdfs[FSDataInputStream] =

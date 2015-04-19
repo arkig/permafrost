@@ -45,6 +45,7 @@ Hdfs io:
   isDirectory should always be false on new path          $isDirectory
   exists should always be false on new path               $exists
   notExists should always be true on new path             $notExists
+  checkIfNoSubDir should always be true if no subdirs     $checkIfNoSubDir
   create -> isFile should always be true                  $create
   mkdirs -> isDirectory should always be true             $mkdirs
   create -> exists should always be true                  $createExists
@@ -74,6 +75,12 @@ Hdfs avro:
 
   def isDirectory = prop((p: Path) =>
     Hdfs.isDirectory(p) must beValue { false })
+
+  def checkIfNoSubDir = prop((p: Path) => (for {
+    fs  <- Hdfs.filesystem
+    _   <- Hdfs.create(new Path(p.toString + "/test-subdir"))
+    res <- Hdfs.checkIfNoSubDir(p, None)
+  } yield res) must beValue { true } )
 
   def exists = prop((p: Path) =>
     Hdfs.exists(p) must beValue { false })
