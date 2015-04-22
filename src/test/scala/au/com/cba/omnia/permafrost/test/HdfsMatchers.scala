@@ -50,16 +50,6 @@ trait HdfsMatchers { self: Spec with ConfigurationContext with UniqueContext =>
   def beValue[A](expected: A): Matcher[Hdfs[A]] =
     beResult(Result.ok(expected))
 
-  //TODO(andersqu): Maybe figure out a better way of doing this. Hacky
-  def endWithPath(t: => Option[Path]) = new Matcher[Option[Path]] {
-    def apply[P <: Option[Path]](b: Expectable[P]) = {
-      val a = t.getOrElse(new Path("")).toString
-      result(b.value!= null && a!= null && b.value.getOrElse(new Path("")).toString.endsWith(a) ,
-        b.description  + " ends with '" + a + "'",
-        b.description  + " doesn't end with '" + a + "'",b)
-    }
-  }
-
   def beValueLike[A](expected: A => SpecResult): Matcher[Hdfs[A]] =
     beResultLike[A]({
       case Ok(v) =>

@@ -16,6 +16,8 @@ package au.com.cba.omnia.permafrost.hdfs
 
 import scalaz._, Scalaz._
 
+import java.io.File
+
 import org.apache.hadoop.fs.Path
 
 import au.com.cba.omnia.permafrost.test.HdfsTest
@@ -34,13 +36,17 @@ Using the safe comparitor:
 
 """
 
+  // This helper function is required because the arbitrary Path 'p' is relative, but the Path returned
+  // by min/maxPartitionM is absolute. It assumes that the tests are using the local filesystem.
+  def absolutePath(path: Path) = new Path("file", null, new File(path.toString).getAbsoluteFile().toString)
+
   def min = prop((p: Path) =>
     (Hdfs.mkdirs(p) >>
       Hdfs.mkdirs(p.suffix("/4")) >>
       Hdfs.mkdirs(p.suffix("/2")) >>
       Hdfs.mkdirs(p.suffix("/3")) >>
       Hdfs.mkdirs(p.suffix("/11")) >>
-      Hive.minPartitionM(p) ) must beValueLike(_ must endWithPath(Some(p.suffix("/2")))))
+      Hive.minPartitionM(p) ) must beValue(Some(absolutePath(p.suffix("/2")))))
 
 
   def max = prop((p: Path) =>
@@ -49,14 +55,14 @@ Using the safe comparitor:
       Hdfs.mkdirs(p.suffix("/2")) >>
       Hdfs.mkdirs(p.suffix("/3")) >>
       Hdfs.mkdirs(p.suffix("/12")) >>
-      Hive.maxPartitionM(p) ) must beValueLike(_ must endWithPath(Some(p.suffix("/12")))))
+      Hive.maxPartitionM(p) ) must beValue(Some(absolutePath(p.suffix("/12")))))
 
   def neg = prop((p: Path) =>
     (Hdfs.mkdirs(p) >>
       Hdfs.mkdirs(p.suffix("/4")) >>
       Hdfs.mkdirs(p.suffix("/2")) >>
       Hdfs.mkdirs(p.suffix("/sdfsdf")) >>
-      Hive.minPartitionM(p) ) must beValueLike(_ must endWithPath(Some(p.suffix("/2")))))
+      Hive.minPartitionM(p) ) must beValue((Some(absolutePath(p.suffix("/2"))))))
 
   val prefix = "/root"
 
